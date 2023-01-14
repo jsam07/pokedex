@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
@@ -26,6 +27,10 @@ export const generateRandomPokemonURLs = (count) => {
     return Array.from(urls);
 };
 
+const extractPokemonTypes = (slots) => {
+    return slots.map((slot) => slot.type.name);
+};
+
 export const fetchAllPokemon = async (urls) => {
     return Promise.all(
         urls.map(async (url) => {
@@ -34,6 +39,7 @@ export const fetchAllPokemon = async (urls) => {
                 return {
                     id: data.id,
                     name: data.name,
+                    types: extractPokemonTypes(data.types),
                     url: data.sprites.other.dream_world.front_default,
                 };
             } catch (error) {

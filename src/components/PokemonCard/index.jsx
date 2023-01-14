@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 
+import tags from '@/content/pokemonTypes';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -31,6 +32,12 @@ function PokemonCard({ pokemon }) {
                 height={100}
                 priority
             />
+            <div className="flex flex-row mx-auto">
+                {pokemon.types.map((type) => {
+                    const Tag = tags[type];
+                    return <Tag key={type} />;
+                })}
+            </div>
         </button>
     );
 }
