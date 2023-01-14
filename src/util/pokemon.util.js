@@ -3,8 +3,11 @@
 import axios from 'axios';
 
 const TOTAL_POKEMON = 1000;
-const RANDOM_POKEMON_COUNT = 4;
+const RANDOM_POKEMON_COUNT = 20;
 const POKEMON_API_URL = 'https://pokeapi.co/api/v2/pokemon';
+
+// TODO: wrap async blocks in try/catch
+// TODO: document function
 
 const generateRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
@@ -20,24 +23,31 @@ export const generateRandomPokemonURLs = (count) => {
         urls.add(pokemon);
     }
 
-    return urls;
+    return Array.from(urls);
 };
 
 export const fetchAllPokemon = async (urls) => {
     return Promise.all(
         urls.map(async (url) => {
-            const { data } = await axios.get(url);
-            return {
-                name: data.name,
-                url: data.sprites.other.dream_world.front_default,
-            };
+            try {
+                const { data } = await axios.get(url);
+                return {
+                    id: data.id,
+                    name: data.name,
+                    url: data.sprites.other.dream_world.front_default,
+                };
+            } catch (error) {
+                return {};
+            }
         })
     );
 };
 
-export const generateRandomPokemon = async () => {
+export const fetchRandomPokemon = async () => {
     const urls = generateRandomPokemonURLs(RANDOM_POKEMON_COUNT);
     const pokemon = await fetchAllPokemon(urls);
 
-    return pokemon;
+    return pokemon
+        .filter((_pokemon) => _pokemon.id && _pokemon.url && _pokemon.name)
+        .slice(0, 4);
 };
