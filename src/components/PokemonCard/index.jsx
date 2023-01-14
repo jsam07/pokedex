@@ -27,7 +27,7 @@ function PokemonCard({ pokemon }) {
             <Image
                 src={pokemon.url}
                 alt={pokemon.name}
-                className="pokemon-img w-32 h-32 mx-auto"
+                className="w-32 h-32 md:w-48 md:h-w-48 mx-auto"
                 width={100}
                 height={100}
                 priority
