@@ -1,15 +1,27 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable react/jsx-no-constructed-context-values */
 import Head from 'next/head';
 import Image from 'next/image';
-import { Inter } from '@next/font/google';
+import { useState } from 'react';
 import styles from '@/styles/Home.module.css';
 
 import SearchBar from '@/components/SearchBar';
-
-const inter = Inter({ subsets: ['latin'] });
+import PokemonModal from '@/components/PokemonModal';
+import RandomPokemon from '@/components/RandomPokemon';
+import { PokemonModalContext } from '@/context/PokemonModalContext';
 
 export default function Home() {
+    const [isPokemonModalOpen, setPokemonModalState] = useState(false);
+
+    const handleOpenPokemonModal = () => {
+        setPokemonModalState(true);
+    };
+
+    const handleClosePokemonModal = () => {
+        setPokemonModalState(false);
+    };
+
     return (
         <>
             <Head>
@@ -24,97 +36,44 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className={styles.main}>
-                <div className={styles.description}>
-                    {' '}
-                    <p>
-                        Get started by searching&nbsp;
-                        <code className={styles.code}>below</code>
-                    </p>
-                    <div>
-                        <a
-                            href="https://www.pokemon.com/us"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <Image
-                                src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
-                                alt="Pokemon Logo"
-                                className={`${styles.vercelLogo} mx-4`}
-                                width={160}
-                                height={24}
-                                priority
-                            />
-                        </a>
+            <PokemonModalContext.Provider
+                value={{ handleOpenPokemonModal, handleClosePokemonModal }}
+            >
+                <PokemonModal
+                    setState={setPokemonModalState}
+                    show={isPokemonModalOpen}
+                />
+                <main className={styles.main}>
+                    <div className={styles.description}>
+                        {' '}
+                        <p>Get started by searching below</p>
+                        <div>
+                            <a
+                                href="https://www.pokemon.com/us"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Image
+                                    src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                                    alt="Pokemon Logo"
+                                    className={`${styles.vercelLogo} mx-4`}
+                                    width={160}
+                                    height={24}
+                                    priority
+                                />
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <div className={styles.center}>
-                    <SearchBar />
-                </div>
+                    <div className={styles.center}>
+                        <SearchBar />
+                    </div>
 
-                <div className={styles.grid}>
-                    <a
-                        href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Docs <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Find in-depth information about Next.js features
-                            and&nbsp;API.
-                        </p>
-                    </a>
-
-                    <a
-                        href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Learn <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Learn about Next.js in an interactive course
-                            with&nbsp;quizzes!
-                        </p>
-                    </a>
-
-                    <a
-                        href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Templates <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Discover and deploy boilerplate example
-                            Next.js&nbsp;projects.
-                        </p>
-                    </a>
-
-                    <a
-                        href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Deploy <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Instantly deploy your Next.js site to a shareable
-                            URL with&nbsp;Vercel.
-                        </p>
-                    </a>
-                </div>
-            </main>
+                    <div className={styles.grid}>
+                        <RandomPokemon />
+                    </div>
+                </main>
+            </PokemonModalContext.Provider>
         </>
     );
 }

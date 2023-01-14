@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 import SearchModal from '../SearchModal';
-import PokemonModal from '../PokemonModal';
 
 function SearchBar() {
     const [isSearchModalOpen, setSearchModalState] = useState(false);
-    const [isPokemonModalOpen, setPokemonModalState] = useState(false);
 
     const showSearchModal = () => {
         setSearchModalState(true);
@@ -58,10 +56,6 @@ function SearchBar() {
             <SearchModal
                 setState={setSearchModalState}
                 show={isSearchModalOpen}
-            />
-            <PokemonModal
-                setState={setPokemonModalState}
-                show={isPokemonModalOpen}
             />
         </div>
     );
