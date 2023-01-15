@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-shadow */
@@ -11,7 +12,7 @@ import SpeechRecognition, {
     useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import content from '../../content/searchableContent';
+import content from '@/data/pokemon.raw';
 import SearchModalHeader from '../SearchModalHeader';
 import SearchModalFooter from '../SearchModalFooter';
 import SearchModalItems from '../SearchModalContainer';
@@ -24,29 +25,6 @@ const searchCategories = [
 ];
 
 const defaultSearchList = {
-    recent: [
-        {
-            img: 'https://images-na.ssl-images-amazon.com/images/I/810dEwTg54L.jpg',
-            genre: 'Psychological Horror',
-            title: 'The Mist',
-            author: 'Stephen King',
-            category: 'book',
-        },
-        {
-            img: 'https://images-na.ssl-images-amazon.com/images/I/6130bODeEIL.jpg',
-            genre: 'Dark Fantasy',
-            title: 'The Dark Tower',
-            author: 'Stephen King',
-            category: 'book',
-        },
-        {
-            img: 'https://images-na.ssl-images-amazon.com/images/I/91hX+QhbRML.jpg',
-            genre: 'Science Fiction',
-            title: 'The Aurora Cycle',
-            author: 'Amie Kaufman & Jay Kristoff',
-            category: 'book',
-        },
-    ],
     results: [...content],
 };
 
@@ -58,7 +36,7 @@ const options = {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ['title', 'author'],
+    keys: ['name'],
 };
 
 const fuse = new Fuse(content, options);
@@ -84,7 +62,7 @@ function SearchModal({ show, setState }) {
         const searchQuery = inputRef.current.value;
 
         if (searchQuery) {
-            const searchResults = fuse.search(searchQuery, { limit: 20 });
+            const searchResults = fuse.search(searchQuery, { limit: 10 });
             let filteredSearchList = searchResults.map((result) => result.item);
 
             filteredSearchList = handleCategoryFilter(
@@ -114,9 +92,9 @@ function SearchModal({ show, setState }) {
     };
 
     useEffect(() => {
-        if (inputRef.current) {
-            handleSearch();
-        }
+        // if (inputRef.current) {
+        //     handleSearch();
+        // }
     }, [selectedCategory]);
 
     useEffect(() => {
@@ -131,7 +109,7 @@ function SearchModal({ show, setState }) {
         handleSearch();
     };
 
-    const closeSearchModal = () => {
+    const handleCloseSearchModal = () => {
         setState(false);
     };
 
@@ -142,7 +120,7 @@ function SearchModal({ show, setState }) {
                 auto-reopen="true"
                 initialFocus={inputRef}
                 className="fixed inset-0 z-50"
-                onClose={closeSearchModal}
+                onClose={handleCloseSearchModal}
             >
                 <div className="flex items-center justify-center text-center">
                     <Transition.Child
@@ -173,7 +151,7 @@ function SearchModal({ show, setState }) {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="flex flex-col font-ibm-plex w-screen max-w-5xl max-h-[95vh] min-w-[320px] mx-8 my-4 text-left align-middle transition-all transform bg-white rounded-lg shadow-xl flex-nowrap">
+                        <div className="flex flex-col font-ibm-plex w-screen max-w-2xl max-h-[95vh] min-w-[320px] mx-8 my-4 text-left align-middle transition-all transform bg-white rounded-lg shadow-xl flex-nowrap">
                             {/* Search Bar */}
                             <SearchModalHeader
                                 inputRef={inputRef}
@@ -195,7 +173,10 @@ function SearchModal({ show, setState }) {
                             <div className="border-t border-search-dark-blue/10" />
 
                             {/* Search Items Container */}
-                            <SearchModalItems searchList={searchList} />
+                            <SearchModalItems
+                                searchList={searchList}
+                                handleCloseSearchModal={handleCloseSearchModal}
+                            />
 
                             {searchList.results.length === 0 ? (
                                 <></>

@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import SearchItem from '../SearchItem';
 
-function SearchModalItems({ searchList }) {
+function SearchModalItems({ searchList, handleCloseSearchModal }) {
     return (
         <div className="search-container flex-grow overflow-auto py-2 min-h-[40px] max-h-[600px]">
             <ul className="">
@@ -16,7 +16,10 @@ function SearchModalItems({ searchList }) {
                             key={`item.title ${idx}`}
                             className="mx-2 my-1.5 rounded-md  snap-always snap-center transition duration-200 ease-in-out hover:cursor-pointer hover:bg-search-gray"
                         >
-                            <SearchItem item={item} />
+                            <SearchItem
+                                item={item}
+                                handleCloseSearchModal={handleCloseSearchModal}
+                            />
                         </li>
                     ))
                 )}
