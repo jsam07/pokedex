@@ -12,6 +12,7 @@ import RandomPokemon from '@/components/RandomPokemon';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 
 export default function Home() {
+    const [pokemon, setModalPokemon] = useState(null);
     const [isPokemonModalOpen, setPokemonModalState] = useState(false);
 
     const handleOpenPokemonModal = () => {
@@ -20,6 +21,10 @@ export default function Home() {
 
     const handleClosePokemonModal = () => {
         setPokemonModalState(false);
+    };
+
+    const handleSetModalPokemon = (_pokemon) => {
+        setModalPokemon(_pokemon);
     };
 
     return (
@@ -37,11 +42,16 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <PokemonModalContext.Provider
-                value={{ handleOpenPokemonModal, handleClosePokemonModal }}
+                value={{
+                    handleSetModalPokemon,
+                    handleOpenPokemonModal,
+                    handleClosePokemonModal,
+                }}
             >
                 <PokemonModal
-                    setState={setPokemonModalState}
+                    pokemon={pokemon}
                     show={isPokemonModalOpen}
+                    setState={setPokemonModalState}
                 />
                 <main className={styles.main}>
                     <div className={styles.description}>

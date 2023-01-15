@@ -1,10 +1,17 @@
-import { Fragment } from 'react';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import Image from 'next/image';
+import { Fragment, useRef, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { XCircleIcon } from '@heroicons/react/24/solid';
 
-function PokemonModal({ show, setState }) {
-    const closePokemonModal = () => {
-        setState(false);
-    };
+import { PokemonModalContext } from '@/context/PokemonModalContext';
+
+function PokemonModal({ pokemon, show }) {
+    const modalContext = useContext(PokemonModalContext);
+    const { handleClosePokemonModal } = modalContext;
+
+    const cancelButtonRef = useRef(null);
 
     return (
         <Transition.Root show={show} as={Fragment}>
@@ -13,7 +20,7 @@ function PokemonModal({ show, setState }) {
                 auto-reopen="true"
                 // initialFocus={inputRef}
                 className="fixed inset-0 z-50"
-                onClose={closePokemonModal}
+                onClose={handleClosePokemonModal}
             >
                 <div className="flex items-center justify-center text-center">
                     <Transition.Child
@@ -44,17 +51,67 @@ function PokemonModal({ show, setState }) {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="flex flex-col font-ibm-plex w-screen max-w-5xl max-h-[95vh] min-w-[320px] mx-8 my-4 text-left align-middle transition-all transform bg-white rounded-lg shadow-xl flex-nowrap">
-                            {/* Search Bar */}
-                            Header
-                            {/* H-Divider */}
-                            <div className="border-t border-search-dark-blue/10" />
-                            {/* Search Items Container */}
-                            Container
-                            {/* H-Divider */}
-                            <div className="border-t border-search-dark-blue/10" />
-                            Footer
-                        </div>
+                        <Dialog.Panel
+                            className={`border-l-${
+                                pokemon ? pokemon.types[0] : '[#fff]'
+                            } border-l-[12px] relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6`}
+                        >
+                            <Image
+                                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg"
+                                alt="Poké Ball"
+                                className="absolute top-0 left-0 mx-auto pt-4 pl-4 flex h-10 w-10 flex-shrink-0 items-center justify-center sm:mx-0 sm:h-12 sm:w-12"
+                                width={60}
+                                height={60}
+                            />
+                            <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+                                {/* Close Button */}
+                                <button
+                                    type="button"
+                                    ref={cancelButtonRef}
+                                    className="flex items-center focus:outline-none"
+                                    onClick={handleClosePokemonModal}
+                                >
+                                    <XCircleIcon
+                                        className="w-6 h-6 ml-2 sm:ml-0 transition duration-200 ease-in text-search-dark-blue/30 hover:text-red-500 lg:h-7 lg:w-7"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+                            </div>
+                            <Image
+                                src={pokemon && pokemon.url}
+                                alt={pokemon ? pokemon.name : 'Pokémon'}
+                                className="relative -top-32 rel w-32 h-32 sm:w-48 sm:h-48 md:w-52 md:h-52 mx-auto"
+                                width={150}
+                                height={150}
+                            />
+                            <div className="relative -top-32 sm:flex sm:items-start">
+                                <div className="relative mt-3 text-center sm:mt-0 sm:text-left">
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-2xl md:text-3xl font-bold leading-6 text-gray-900"
+                                    >
+                                        {pokemon ? pokemon.name : 'Pokémon'}
+                                    </Dialog.Title>
+                                    <h3 className="text-gray-300">
+                                        {pokemon ? `#${pokemon.id}` : ''}
+                                    </h3>
+                                    <div className="mt-2">
+                                        <p className="text-sm text-gray-500">
+                                            {pokemon ? pokemon.description : ''}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                                <button
+                                    type="button"
+                                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm transition duration-500 ease-in-out"
+                                    onClick={handleClosePokemonModal}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </Dialog.Panel>
                     </Transition.Child>
                 </div>
             </Dialog>
