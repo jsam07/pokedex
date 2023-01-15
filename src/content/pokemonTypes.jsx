@@ -2,79 +2,52 @@
 /* eslint-disable import/no-unresolved */
 import Tag from '@/components/Tag';
 
-const tags = {
-    normal: () => {
-        const tag = { name: 'Normal' };
-        return <Tag className="bg-[#A8A77A] text-[#fff]" tag={tag} />;
-    },
-    fire: () => {
-        const tag = { name: 'Fire' };
-        return <Tag className="bg-[#EE8130] text-[#fff]" tag={tag} />;
-    },
-    water: () => {
-        const tag = { name: 'Water' };
-        return <Tag className="bg-[#6390F0] text-[#fff]" tag={tag} />;
-    },
-    electric: () => {
-        const tag = { name: 'Electric' };
-        return <Tag className="bg-[#F7D02C] text-[#fff]" tag={tag} />;
-    },
-    grass: () => {
-        const tag = { name: 'Grass' };
-        return <Tag className="bg-[#7AC74C] text-[#fff]" tag={tag} />;
-    },
-    ice: () => {
-        const tag = { name: 'Ice' };
-        return <Tag className="bg-[#96D9D6] text-[#fff]" tag={tag} />;
-    },
-    fighting: () => {
-        const tag = { name: 'Fighting' };
-        return <Tag className="bg-[#C22E28] text-[#fff]" tag={tag} />;
-    },
-    poison: () => {
-        const tag = { name: 'Poison' };
-        return <Tag className="bg-[#A33EA1] text-[#fff]" tag={tag} />;
-    },
-    ground: () => {
-        const tag = { name: 'Ground' };
-        return <Tag className="bg-[#E2BF65] text-[#fff]" tag={tag} />;
-    },
-    flying: () => {
-        const tag = { name: 'Flying' };
-        return <Tag className="bg-[#A98FF3] text-[#fff]" tag={tag} />;
-    },
-    psychic: () => {
-        const tag = { name: 'Psychic' };
-        return <Tag className="bg-[#F95587] text-[#fff]" tag={tag} />;
-    },
-    bug: () => {
-        const tag = { name: 'Bug' };
-        return <Tag className="bg-[#A6B91A] text-[#fff]" tag={tag} />;
-    },
-    rock: () => {
-        const tag = { name: 'Rock' };
-        return <Tag className="bg-[#B6A136] text-[#fff]" tag={tag} />;
-    },
-    ghost: () => {
-        const tag = { name: 'Ghost' };
-        return <Tag className="bg-[#735797] text-[#fff]" tag={tag} />;
-    },
-    dragon: () => {
-        const tag = { name: 'Dragon' };
-        return <Tag className="bg-[#6F35FC] text-[#fff]" tag={tag} />;
-    },
-    dark: () => {
-        const tag = { name: 'Dark' };
-        return <Tag className="bg-[#705746] text-[#fff]" tag={tag} />;
-    },
-    steel: () => {
-        const tag = { name: 'Steel' };
-        return <Tag className="bg-[#B7B7CE] text-[#fff]" tag={tag} />;
-    },
-    fairy: () => {
-        const tag = { name: 'Fairy' };
-        return <Tag className="bg-[#D685AD] text-[#fff]" tag={tag} />;
-    },
+const objectMap = (obj, fn) => {
+    return Object.fromEntries(
+        Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)])
+    );
+};
+
+export const typeColors = {
+    normal: { bg: '#A8A77A', text: 'white', icon: '🔘' },
+    fire: { bg: '#EE8130', text: 'white', icon: '🔥' },
+    water: { bg: '#6390F0', text: 'white', icon: '💧' },
+    electric: { bg: '#F7D02C', text: 'white', icon: '⚡' },
+    grass: { bg: '#7AC74C', text: 'white', icon: '🌱' },
+    ice: { bg: '#96D9D6', text: 'white', icon: '❄️' },
+    fighting: { bg: '#C22E28', text: 'white', icon: '🥊' },
+    poison: { bg: '#A33EA1', text: 'white', icon: '☠️' },
+    ground: { bg: '#E2BF65', text: 'white', icon: '🍂' },
+    flying: { bg: '#A98FF3', text: 'white', icon: '🕊️' },
+    psychic: { bg: '#F95587', text: 'white', icon: '🧠' },
+    bug: { bg: '#A6B91A', text: 'white', icon: '🐛' },
+    rock: { bg: '#B6A136', text: 'white', icon: '🪨' },
+    ghost: { bg: '#735797', text: 'white', icon: '👻' },
+    dragon: { bg: '#6F35FC', text: 'white', icon: '🐉' },
+    dark: { bg: '#705746', text: 'white', icon: '🟤' },
+    steel: { bg: '#B7B7CE', text: 'white', icon: '🔩' },
+    fairy: { bg: '#D685AD', text: 'white', icon: '🧚‍♀️' },
+};
+
+const generateTagComponent = (type, name) => {
+    const tag = { name, icon: type.icon };
+
+    return (
+        <Tag key={name} className={`bg-${name}/20 text-${name}`} tag={tag} />
+    );
+};
+
+const tags = objectMap(typeColors, (type, name) =>
+    generateTagComponent(type, name)
+);
+
+export const geTypeColor = (pokemon) => {
+    if (!pokemon) {
+        return '';
+    }
+
+    const type = pokemon.types[0];
+    return typeColors[type].bg;
 };
 
 export default tags;

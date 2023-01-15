@@ -50,7 +50,7 @@
   padding: 0.5rem 1.2rem;
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  border: 1px solid rgba(var(--card-border-rgb), 0.30);
   transition: background 200ms, border 200ms;
 }
 
@@ -155,7 +155,7 @@
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.25);
+    border: 1px solid rgba(var(--card-border-rgb), 0.45);
   }
 
   .card:hover span {
@@ -226,7 +226,7 @@
     padding: 2rem 1rem 1.4rem;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
+    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.45);
     background: linear-gradient(
       to bottom,
       rgba(var(--background-start-rgb), 1),
@@ -253,6 +253,11 @@
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
+  .card {
+    padding: 1rem 2.5rem;
+    margin:  0.5rem 0.5rem;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
