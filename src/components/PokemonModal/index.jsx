@@ -5,6 +5,8 @@ import { Fragment, useRef, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
+import tags from '@/content/pokemonTypes';
+import PokemonDetails from '../PokemonDetails';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 
 function PokemonModal({ pokemon, show }) {
@@ -18,7 +20,6 @@ function PokemonModal({ pokemon, show }) {
             <Dialog
                 as="div"
                 auto-reopen="true"
-                // initialFocus={inputRef}
                 className="fixed inset-0 z-50"
                 onClose={handleClosePokemonModal}
             >
@@ -54,7 +55,7 @@ function PokemonModal({ pokemon, show }) {
                         <Dialog.Panel
                             className={`border-l-${
                                 pokemon ? pokemon.types[0] : '[#fff]'
-                            } border-l-[12px] relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6`}
+                            } min-w-[320px] border-l-[12px] relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6`}
                         >
                             <Image
                                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg"
@@ -77,31 +78,50 @@ function PokemonModal({ pokemon, show }) {
                                     />
                                 </button>
                             </div>
-                            <Image
-                                src={pokemon && pokemon.url}
-                                alt={pokemon ? pokemon.name : 'Pokémon'}
-                                className="relative -top-32 rel w-32 h-32 sm:w-48 sm:h-48 md:w-52 md:h-52 mx-auto"
-                                width={150}
-                                height={150}
-                            />
-                            <div className="relative -top-32 sm:flex sm:items-start">
-                                <div className="relative mt-3 text-center sm:mt-0 sm:text-left">
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-2xl md:text-3xl font-bold leading-6 text-gray-900"
-                                    >
-                                        {pokemon ? pokemon.name : 'Pokémon'}
-                                    </Dialog.Title>
-                                    <h3 className="text-gray-300">
-                                        {pokemon ? `#${pokemon.id}` : ''}
-                                    </h3>
-                                    <div className="mt-2">
-                                        <p className="text-sm text-gray-500">
-                                            {pokemon ? pokemon.description : ''}
-                                        </p>
+                            <div className="-mt-20 sm:-mt-24 md:-mt-32">
+                                <Image
+                                    src={pokemon && pokemon.url}
+                                    alt={pokemon ? pokemon.name : 'Pokémon'}
+                                    className="w-32 h-32 sm:w-48 sm:h-48 md:w-52 md:h-52 mx-auto"
+                                    width={150}
+                                    height={150}
+                                />
+                                <div className="sm:flex sm:items-start">
+                                    <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                                        <div className="flex flex-row">
+                                            <Dialog.Title
+                                                as="h3"
+                                                className="text-2xl md:text-3xl font-bold leading-6 text-gray-900"
+                                            >
+                                                {pokemon
+                                                    ? pokemon.name
+                                                    : 'Pokémon'}{' '}
+                                                {'  '}
+                                                <span className="text-base text-gray-300">
+                                                    {pokemon
+                                                        ? `#${pokemon.id}`
+                                                        : ''}
+                                                </span>
+                                            </Dialog.Title>
+                                            <div className="ml-4">
+                                                {pokemon &&
+                                                    pokemon.types.map(
+                                                        (type) => tags[type]
+                                                    )}
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-2">
+                                            <p className="text-sm text-gray-500 text-ellipsis">
+                                                {pokemon
+                                                    ? pokemon.description
+                                                    : ''}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <PokemonDetails pokemon={pokemon} />
                             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                                 <button
                                     type="button"

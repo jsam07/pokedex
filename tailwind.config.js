@@ -33,6 +33,12 @@ module.exports = {
                 dark: '#705746',
                 steel: '#B7B7CE',
                 fairy: '#D685AD',
+                hp: '#df2140',
+                attack: '#ff994d',
+                defense: '#ffdc43',
+                'special-attack': '#85ddff',
+                'special-defense': '#a8ef89',
+                speed: '#fc93a8',
             },
             boxShadow: {
                 search: '0 16px 16px 2px rgba(29,17,51,.04),0 6px 24px 4px rgba(9,32,77,.12),0 8px 12px -5px rgba(29,17,51,.12)',
@@ -43,11 +49,11 @@ module.exports = {
         'text-white',
         {
             pattern:
-                /border-l-(normal|fire|water|electric|grass|ice|fighting|poison|ground|flying|psychic|bug|rock|ghost|dragon|dark|steel|fairy)/,
+                /(bg|border|text)(-(l|r|t|b))?-(normal|fire|water|electric|grass|ice|fighting|poison|ground|flying|psychic|bug|rock|ghost|dragon|dark|steel|fairy)/,
         },
         {
             pattern:
-                /bg-(normal|fire|water|electric|grass|ice|fighting|poison|ground|flying|psychic|bug|rock|ghost|dragon|dark|steel|fairy)/,
+                /(bg|text)-(hp|attack|defense|special-attack|special-defense|speed)/,
         },
     ],
     plugins: [require('@tailwindcss/forms')],

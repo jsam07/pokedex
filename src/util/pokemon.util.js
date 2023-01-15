@@ -12,6 +12,10 @@ const POKEMON_SPECIES_API_URL = 'https://pokeapi.co/api/v2/pokemon-species';
 // TODO: wrap async blocks in try/catch
 // TODO: document function
 
+const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const generateRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 };
@@ -33,8 +37,17 @@ const extractPokemonTypes = (slots) => {
     return slots.map((slot) => slot.type.name);
 };
 
-const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+const extractPokemonStats = (stats) => {
+    return stats.map((stat) => {
+        return {
+            name: stat.stat.name,
+            score: stat.base_stat,
+        };
+    });
+};
+
+const extractPokemonAbilities = (abilities) => {
+    return abilities.map((ability) => ability.ability.name.replace('-', ' '));
 };
 
 export const fetchPokemonDescription = async (id, name) => {
@@ -50,7 +63,6 @@ export const fetchPokemonDescription = async (id, name) => {
             .replace(re, name)
             .replace('\n', ' ')
             .replace('POKéMON', 'Pokémon')
-            .replace('POKéMON', 'Pokémon')
             .replace('\x0c', ' ');
 
         return description;
@@ -59,22 +71,28 @@ export const fetchPokemonDescription = async (id, name) => {
     }
 };
 
-export const fetchAllPokemon = async (urls) => {
+const fetchAllPokemon = async (urls) => {
     return Promise.all(
         urls.map(async (url) => {
             try {
                 const { data } = await axios.get(url);
-                let { name } = data;
+                let { name, height, weight } = data;
                 name = capitalize(name);
+                height /= 10; // decimeters -> meters
+                weight /= 10; // hectograms -> kilograms
 
-                const { id, types } = data;
+                const { id, types, stats, abilities } = data;
                 const description = await fetchPokemonDescription(id, name);
 
                 return {
                     id,
                     name,
+                    height,
+                    weight,
                     description,
+                    stats: extractPokemonStats(stats),
                     types: extractPokemonTypes(types),
+                    abilities: extractPokemonAbilities(abilities),
                     url: data.sprites.other.dream_world.front_default,
                 };
             } catch (error) {
