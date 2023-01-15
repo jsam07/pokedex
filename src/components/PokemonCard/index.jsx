@@ -33,7 +33,7 @@ function PokemonCard({ pokemon }) {
             <Image
                 src={pokemon.url}
                 alt={pokemon.name}
-                className="w-32 h-32 md:w-48 md:h-w-48 mx-auto"
+                className="w-32 h-32 md:w-48 md:h-w-48 mx-auto transition duration-500 ease-in-out hover:scale-105"
                 width={100}
                 height={100}
                 priority
