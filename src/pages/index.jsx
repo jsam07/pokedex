@@ -68,7 +68,7 @@ export default function Home() {
                                     alt="Pokemon Logo"
                                     className={`${styles.vercelLogo} mx-4`}
                                     width={160}
-                                    height={24}
+                                    height={160}
                                     priority
                                 />
                             </a>
