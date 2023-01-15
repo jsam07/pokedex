@@ -87,7 +87,7 @@ function PokemonModal({ pokemon, show }) {
                                     height={150}
                                 />
                                 <div className="sm:flex sm:items-start">
-                                    <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                                    <div className="mt-3 text-center sm:mt-0 sm:text-left mx-auto">
                                         <div className="flex flex-row">
                                             <Dialog.Title
                                                 as="h3"
@@ -111,7 +111,7 @@ function PokemonModal({ pokemon, show }) {
                                             </div>
                                         </div>
 
-                                        <div className="mt-2">
+                                        <div className="my-1">
                                             <p className="text-sm text-gray-500 text-ellipsis">
                                                 {pokemon
                                                     ? pokemon.description
@@ -119,6 +119,12 @@ function PokemonModal({ pokemon, show }) {
                                             </p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="flex items-center mt-3 justify-center">
+                                <div className="inline-flex items-center rounded-md bg-slate-100 text-slate-600 px-2.5 py-0.5 text-sm font-base">
+                                    {pokemon &&
+                                        `${pokemon.height} m | ${pokemon.weight} kg`}
                                 </div>
                             </div>
                             <PokemonDetails pokemon={pokemon} />
