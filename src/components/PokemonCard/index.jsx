@@ -38,7 +38,7 @@ function PokemonCard({ pokemon }) {
                 height={100}
                 priority
             />
-            <div className="flex flex-row mx-auto">
+            <div className="flex flex-row mx-auto space-x-2 mt-2">
                 {pokemon.types.map((type) => tags[type])}
             </div>
         </button>
