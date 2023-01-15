@@ -103,7 +103,7 @@ function PokemonModal({ pokemon, show }) {
                                                         : ''}
                                                 </span>
                                             </Dialog.Title>
-                                            <div className="ml-4">
+                                            <div className="ml-4 flex p-2">
                                                 {pokemon &&
                                                     pokemon.types.map(
                                                         (type) => tags[type]
