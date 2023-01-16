@@ -12,7 +12,7 @@
 ## Pokédex
 
 <p align="center">
-    <img alt="Search" src="./assets/images/pokedex_hero.png" width="80%"/>
+    <img alt="Search" src="./assets/images/pokedex_hero.png" width="100%"/>
 </p>
 
 A Pokédex that allows users to search for their favorite Pokémon by name.
