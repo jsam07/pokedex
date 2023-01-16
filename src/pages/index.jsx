@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import Head from 'next/head';
 import Image from 'next/image';
