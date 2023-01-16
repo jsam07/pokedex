@@ -5,7 +5,7 @@ import { Fragment, useRef, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
-import tags from '@/content/pokemonTypes';
+import { tags } from '@/content/pokemonTypes';
 import PokemonDetails from '../PokemonDetails';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 

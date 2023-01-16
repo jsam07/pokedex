@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-prototype-builtins */
@@ -6,26 +7,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 
-import allPokemon from '@/data/pokemon.raw';
-import pokemonTrie from '@/data/pokemon.trie';
+import { allPokemon } from '@/data/pokemon.raw';
+import { pokemonTrie } from '@/data/pokemon.trie';
 
-const TOTAL_POKEMON = 1008;
-const RANDOM_POKEMON_FETCH_COUNT = 15;
-const RANDOM_POKEMON_RENDER_COUNT = 4;
-const POKEMON_API_URL = 'https://pokeapi.co/api/v2/pokemon';
-const POKEMON_SPECIES_API_URL = 'https://pokeapi.co/api/v2/pokemon-species';
-const ALL_POKEMON_API_URL = 'https://pokeapi.co/api/v2/pokemon/?limit=1500';
+import { capitalize, generateRandomNumber } from './common.util';
+import {
+    ALL_POKEMON_API_URL,
+    POKEMON_API_URL,
+    POKEMON_SPECIES_API_URL,
+    RANDOM_POKEMON_FETCH_COUNT,
+    RANDOM_POKEMON_RENDER_COUNT,
+    TOTAL_POKEMON,
+} from '@/constants';
 
 // TODO: wrap async blocks in try/catch
 // TODO: document function
-
-const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-const generateRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-};
+// TODO: refactor misc helper methods (duplicate of capi)
 
 export const generateRandomPokemonURLs = (count) => {
     const urls = new Set();
@@ -156,6 +153,7 @@ const generateTrie = (pokemon) => {
             id: _pokemon.id,
             name: _pokemon.name,
             url: _pokemon.url,
+            types: _pokemon.types,
         };
     });
 
@@ -175,9 +173,13 @@ const navigateToNode = (trie, searchText) => {
     return curr;
 };
 
-const findAllPokemon = (node, pokemon) => {
+const findAllPokemon = (node, pokemon, limit) => {
     if (!node) {
         return [];
+    }
+
+    if (limit && pokemon.length === limit) {
+        return pokemon;
     }
 
     if (node.hasOwnProperty('match')) {
@@ -186,16 +188,16 @@ const findAllPokemon = (node, pokemon) => {
 
     for (const key in node) {
         if (typeof node[key] === 'object' && node[key] !== null) {
-            pokemon.concat(findAllPokemon(node[key], pokemon));
+            pokemon.concat(findAllPokemon(node[key], pokemon, limit));
         }
     }
 
     return pokemon;
 };
 
-export const searchForPokemon = (searchText) => {
+export const searchForPokemon = (searchText, limit) => {
     const node = navigateToNode(pokemonTrie, searchText);
-    const pokemon = findAllPokemon(node, []);
+    const pokemon = findAllPokemon(node, [], limit);
 
     return pokemon;
 };
@@ -203,18 +205,6 @@ export const searchForPokemon = (searchText) => {
 export const fetchRandomPokemon = async () => {
     const urls = generateRandomPokemonURLs(RANDOM_POKEMON_FETCH_COUNT);
     const pokemon = await fetchAllRandomPokemon(urls);
-
-    // const test = await fetchAllPokemon();
-    // const data = test.filter(
-    //     (_pokemon) => _pokemon.id && _pokemon.url && _pokemon.name
-    // );
-
-    // console.log(
-    //     data.map((_pokemon) => {
-    //         const { id, name, url, types } = _pokemon;
-    //         return { id, name, url, types };
-    //     })
-    // );
 
     return pokemon
         .filter((_pokemon) => _pokemon.id && _pokemon.url && _pokemon.name)
