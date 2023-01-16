@@ -1,38 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
+
+<!-- PROJECT LOGO -->
+<br />
+
+  <a align="left" href="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" alt="Logo" height="60">
+  </a>
+
+<!-- ABOUT THE PROJECT -->
+
+## Pokédex
+
+<p align="center">
+    <img alt="Search" src="./assets/images/pokedex_hero.png" width="80%"/>
+</p>
+
+A Pokédex that allows users to search for their favorite Pokémon by name.
+
+### Built With
+
+-   ![React](https://img.shields.io/badge/-React-050B1E?&logo=React)
+-   ![JavaScript](https://img.shields.io/badge/-JavaScript-050B1E?&logo=JavaScript)
+-   ![NextJS](https://img.shields.io/badge/-Next.js-050B1E?&logo=next.js)
+-   ![TailwindCSS](https://img.shields.io/badge/-Tailwind_CSS-050B1E?&logo=tailwind-css)
+
+<!-- GETTING STARTED -->
 
 ## Getting Started
 
-First, run the development server:
+### 1. Download repository and install dependencies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+Clone this repository:
+
+```
+git clone git@github.com:jsam07/bcch-pokedex.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install npm dependencies:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+cd bcch-pokedex
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### 2. Start Development Server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The server is now running on http://localhost:3000.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<!-- TESTING -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Testing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Run test suite:
 
-## Deploy on Vercel
+```
+npm run test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Linting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Run linter:
+
+```
+npm run lint
+```
+
+## License
+
+[MIT](LICENSE) © Jamie Samuel
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+- [Heroicons](https://heroicons.com/)
+- [Headless UI](https://headlessui.dev/)
+
