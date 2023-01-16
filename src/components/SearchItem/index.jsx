@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 
-import tags from '@/content/pokemonTypes';
+import { tags } from '@/content/pokemonTypes';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 import { fetchPokemonDetailsFromID } from '@/util/pokemon.util';
 

@@ -1,4 +1,5 @@
-const pokemon = [
+/* eslint-disable import/prefer-default-export */
+export const allPokemon = [
     {
         id: 1,
         name: 'Bulbasaur',
@@ -4032,5 +4033,3 @@ const pokemon = [
         types: ['water', 'fighting'],
     },
 ];
-
-export default pokemon;

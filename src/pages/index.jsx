@@ -66,7 +66,7 @@ export default function Home() {
                                 <Image
                                     src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
                                     alt="Pokemon Logo"
-                                    className={`${styles.vercelLogo} mx-4`}
+                                    className="mx-4 w-44 h-auto"
                                     width={160}
                                     height={160}
                                     priority

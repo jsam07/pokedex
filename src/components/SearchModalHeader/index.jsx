@@ -1,104 +1,21 @@
 /* eslint-disable react/prop-types */
-import { Fragment } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
 import {
-    CheckIcon,
     XCircleIcon,
     MicrophoneIcon,
-    ChevronUpDownIcon,
     MagnifyingGlassIcon,
 } from '@heroicons/react/24/solid';
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
-}
 
 function SearchModalHeader({
     inputRef,
     listening,
     clearSearch,
     handleSearch,
-    selectedCategory,
-    searchCategories,
     SpeechRecognition,
-    handleSetSelectedCategory,
     browserSupportsSpeechRecognition,
 }) {
     return (
         <header className="flex-shrink-0 mx-4 my-2 ">
             <div className="relative flex flex-col-reverse items-center justify-between sm:flex-row">
-                <Listbox
-                    value={selectedCategory}
-                    onChange={handleSetSelectedCategory}
-                >
-                    {({ open }) => (
-                        <div className="relative w-full my-2 sm:my-0 sm:w-auto sm:min-w-[100px]">
-                            <Listbox.Button className="relative w-full sm:w-auto sm:min-w-[100px] py-2 pl-3 pr-10 text-left bg-white border rounded-md shadow-sm cursor-default hover:cursor-pointer border-search-gray focus:outline-none sm:text-sm">
-                                <span className="block truncate">
-                                    {selectedCategory.name}
-                                </span>
-                                <span className="absolute inset-y-0 right-0 flex items-center pr-2 ">
-                                    <ChevronUpDownIcon
-                                        className="w-5 h-5 text-search-dark-blue/30"
-                                        aria-hidden="true"
-                                    />
-                                </span>
-                            </Listbox.Button>
-
-                            <Transition
-                                show={open}
-                                as={Fragment}
-                                enter="transition ease-out duration-300"
-                                enterFrom="transform opacity-0 scale-95"
-                                enterTo="transform opacity-100 scale-100"
-                                leave="transition ease-in duration-75"
-                                leaveFrom="transform opacity-100 scale-200"
-                                leaveTo="transform opacity-0 scale-95"
-                            >
-                                <Listbox.Options className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white border rounded-md shadow-lg max-h-60 border-search-gray focus:outline-none sm:text-sm">
-                                    {searchCategories.map((category) => (
-                                        <Listbox.Option
-                                            key={category.id}
-                                            className={({ active }) =>
-                                                classNames(
-                                                    active
-                                                        ? 'text-search-dark-blue bg-search-gray cursor-pointer'
-                                                        : 'text-search-dark-blue',
-                                                    'cursor-default select-none relative py-2 pl-8 pr-4'
-                                                )
-                                            }
-                                            value={category}
-                                        >
-                                            {({ selected }) => (
-                                                <>
-                                                    <span
-                                                        className={classNames(
-                                                            selected
-                                                                ? 'font-semibold'
-                                                                : 'font-normal',
-                                                            'block truncate'
-                                                        )}
-                                                    >
-                                                        {category.name}
-                                                    </span>
-
-                                                    {selected ? (
-                                                        <span className="text-search-dark-blue absolute inset-y-0 left-0 flex items-center pl-1.5">
-                                                            <CheckIcon
-                                                                className="w-5 h-5"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </span>
-                                                    ) : null}
-                                                </>
-                                            )}
-                                        </Listbox.Option>
-                                    ))}
-                                </Listbox.Options>
-                            </Transition>
-                        </div>
-                    )}
-                </Listbox>
                 <div
                     className="flex flex-row w-full sm:ml-4"
                     onClick={() => {

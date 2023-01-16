@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 
-import tags from '@/content/pokemonTypes';
+import { tags } from '@/content/pokemonTypes';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
 
 const inter = Inter({ subsets: ['latin'] });
