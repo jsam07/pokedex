@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "cross-env NODE_ENV=test npm run test:unit",
-    "test:unit": "jest -i --colors --verbose --detectOpenHandles --passWithNoTests tests/spec/unit --watchAll --runInBand"
+    "test:unit": "jest -i --colors --verbose --detectOpenHandles --passWithNoTests tests/spec/unit"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
