@@ -19,6 +19,7 @@ function PokemonModal({ pokemon, show }) {
         <Transition.Root show={show} as={Fragment}>
             <Dialog
                 as="div"
+                open={show}
                 auto-reopen="true"
                 className="fixed inset-0 z-50"
                 onClose={handleClosePokemonModal}
