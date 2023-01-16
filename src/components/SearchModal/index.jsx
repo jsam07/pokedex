@@ -1,10 +1,10 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-shadow */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import Fuse from 'fuse.js';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useRef, useEffect } from 'react';
 
@@ -12,90 +12,42 @@ import SpeechRecognition, {
     useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import content from '@/data/pokemon.raw';
 import SearchModalHeader from '../SearchModalHeader';
-import SearchModalFooter from '../SearchModalFooter';
 import SearchModalItems from '../SearchModalContainer';
-
-const searchCategories = [
-    { id: 1, name: 'All' },
-    { id: 2, name: 'Books' },
-    { id: 3, name: 'Movies' },
-    { id: 4, name: 'Shows' },
-];
-
-const defaultSearchList = {
-    results: [...content],
-};
-
-const options = {
-    shouldSort: true,
-    includeMatches: true,
-    threshold: 0.1,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: ['name'],
-};
-
-const fuse = new Fuse(content, options);
-
-function handleCategoryFilter(results, category) {
-    if (category === 'All') {
-        return results;
-    }
-
-    return results.filter((item) => item.category === category);
-}
+import { searchForPokemon } from '@/util/pokemon.util';
+import { POKEMON_QUERY_LIMIT } from '@/constants';
 
 function SearchModal({ show, setState }) {
     const inputRef = useRef(null);
-    const [searchList, setSearchList] = useState(defaultSearchList);
-    const [selectedCategory, setSelectedCategory] = useState(
-        searchCategories[0]
-    );
+    const [searchResults, setSearchResults] = useState([]);
+    const [isSearchActive, setIsSearchActive] = useState(false);
+
     const { listening, transcript, browserSupportsSpeechRecognition } =
         useSpeechRecognition();
 
     const handleSearch = () => {
-        const searchQuery = inputRef.current.value;
+        const searchQuery = inputRef.current.value.trim();
 
         if (searchQuery) {
-            const searchResults = fuse.search(searchQuery, { limit: 10 });
-            let filteredSearchList = searchResults.map((result) => result.item);
-
-            filteredSearchList = handleCategoryFilter(
-                filteredSearchList,
-                selectedCategory.name
+            const queryResults = searchForPokemon(
+                searchQuery.toLowerCase(),
+                POKEMON_QUERY_LIMIT
             );
 
-            setSearchList({
-                recent: searchList.recent,
-                results: filteredSearchList,
-            });
+            setSearchResults(queryResults);
+            setIsSearchActive(true);
         } else {
-            const filteredSearchList = handleCategoryFilter(
-                content,
-                selectedCategory.name
-            );
-
-            setSearchList({
-                recent: searchList.recent,
-                results: filteredSearchList,
-            });
+            setSearchResults([]);
+            setIsSearchActive(false);
         }
     };
 
-    const handleSetSelectedCategory = (value) => {
-        setSelectedCategory(value);
+    const handleClearSearch = () => {
+        inputRef.current.value = '';
+        handleSearch();
     };
 
-    useEffect(() => {
-        // if (inputRef.current) {
-        //     handleSearch();
-        // }
-    }, [selectedCategory]);
+    const handleCloseSearchModal = () => setState(false);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -103,15 +55,6 @@ function SearchModal({ show, setState }) {
             handleSearch();
         }
     }, [transcript, listening]);
-
-    const clearSearch = () => {
-        inputRef.current.value = '';
-        handleSearch();
-    };
-
-    const handleCloseSearchModal = () => {
-        setState(false);
-    };
 
     return (
         <Transition.Root show={show} as={Fragment}>
@@ -151,19 +94,14 @@ function SearchModal({ show, setState }) {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="flex flex-col font-ibm-plex w-screen max-w-2xl max-h-[95vh] min-w-[320px] mx-8 my-4 text-left align-middle transition-all transform bg-white rounded-lg shadow-xl flex-nowrap">
+                        <div className="flex flex-col font-ibm-plex w-screen max-w-2xl max-h-[500px] min-w-[320px] mx-8 my-4 text-left align-middle transition-all transform bg-white rounded-lg shadow-xl flex-nowrap">
                             {/* Search Bar */}
                             <SearchModalHeader
                                 inputRef={inputRef}
                                 listening={listening}
-                                clearSearch={clearSearch}
+                                clearSearch={handleClearSearch}
                                 handleSearch={handleSearch}
-                                selectedCategory={selectedCategory}
-                                searchCategories={searchCategories}
                                 SpeechRecognition={SpeechRecognition}
-                                handleSetSelectedCategory={
-                                    handleSetSelectedCategory
-                                }
                                 browserSupportsSpeechRecognition={
                                     browserSupportsSpeechRecognition
                                 }
@@ -174,23 +112,10 @@ function SearchModal({ show, setState }) {
 
                             {/* Search Items Container */}
                             <SearchModalItems
-                                searchList={searchList}
+                                results={searchResults}
+                                isSearchActive={isSearchActive}
                                 handleCloseSearchModal={handleCloseSearchModal}
                             />
-
-                            {searchList.results.length === 0 ? (
-                                <></>
-                            ) : (
-                                <>
-                                    {/* H-Divider */}
-                                    <div className="border-t border-search-dark-blue/10" />
-
-                                    {/* Search Footer */}
-                                    <SearchModalFooter
-                                        searchItemsCount={content.length}
-                                    />
-                                </>
-                            )}
                         </div>
                     </Transition.Child>
                 </div>
