@@ -1,16 +1,11 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
 import { useState } from 'react';
 import { Tab, Transition } from '@headlessui/react';
+
+import { classNames } from '@/lib/common.lib';
 import PokemonBaseStats from '../PokemonBaseStats';
 import PokemonAbilities from '../PokemonAbilities';
 
 const tabs = [{ name: 'Base Stats' }, { name: 'Abilities' }];
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
-}
 
 function getTabColor(pokemon) {
     if (!pokemon) {

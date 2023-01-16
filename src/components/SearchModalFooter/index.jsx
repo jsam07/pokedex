@@ -1,14 +1,10 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable react/prop-types */
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
 
 function SearchModalFooter({ searchItemsCount }) {
     return (
         <footer className="flex-shrink-0 my-2 ">
             <div className="flex flex-row items-center justify-center mx-2">
-                {searchItemsCount === 0 ? (
-                    <></>
-                ) : (
+                {searchItemsCount === 0 && (
                     <div className="transition duration-200 ease-in-out rounded-md text-search-dark-blue hover:cursor-pointer hover:bg-search-gray search-item">
                         <article className="flex items-center justify-center px-2 py-1 space-x-2">
                             <div className="flex-auto min-w-0">

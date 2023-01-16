@@ -30,5 +30,18 @@ module.exports = {
             'error',
             { devDependencies: true },
         ],
+        'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
+    },
+    settings: {
+        'import/resolver': {
+            node: {
+                paths: ['src'],
+                extensions: ['.js', '.ts', '.d.ts', '.jsx', '.tsx', '.css'],
+            },
+            alias: {
+                map: [['@/*', './src']],
+                extensions: ['.ts', '.js', '.jsx', '.json'],
+            },
+        },
     },
 };

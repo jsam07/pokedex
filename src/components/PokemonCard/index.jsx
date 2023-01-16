@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import Image from 'next/image';
 import { useContext } from 'react';
 import { Inter } from '@next/font/google';
