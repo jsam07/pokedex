@@ -28,7 +28,7 @@ const navigateToNode = (trie, searchText) => {
  * @returns An array of all pokemon found so far.
  */
 const findAllPokemon = (node, pokemon, limit) => {
-    if (!node) {
+    if (!node || limit === 0) {
         return [];
     }
 
@@ -83,10 +83,11 @@ export const generateTrie = (pokemon) => {
  * Searches trie for all pokemon whose name start with `searchText`.
  * @param {string} searchText The text for query for pokemon.
  * @param {number} limit The maximum number of pokemon to search for.
+ * @param {object} trie Custom search tree. Defaults to generated pokemon trie if not defined.
  * @returns An array of all pokemon found in the search tree.
  */
-export const searchForPokemon = (searchText, limit) => {
-    const node = navigateToNode(pokemonTrie, searchText);
+export const searchForPokemon = (searchText, limit, trie = pokemonTrie) => {
+    const node = navigateToNode(trie, searchText);
     const pokemon = findAllPokemon(node, [], limit);
 
     return pokemon;
