@@ -47,7 +47,10 @@ function SearchModal({ show, setState }) {
         handleSearch();
     };
 
-    const handleCloseSearchModal = () => setState(false);
+    const handleCloseSearchModal = () => {
+        setState(false);
+        handleClearSearch();
+    };
 
     useEffect(() => {
         if (inputRef.current) {
@@ -65,7 +68,7 @@ function SearchModal({ show, setState }) {
                 className="fixed inset-0 z-50"
                 onClose={handleCloseSearchModal}
             >
-                <div className="flex items-center justify-center text-center">
+                <div className="flex items-start md:items-center justify-center text-center">
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -75,7 +78,7 @@ function SearchModal({ show, setState }) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 transition-opacity bg-search-dark-blue bg-opacity-30" />
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-80 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
