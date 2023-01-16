@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 function Tag({ className, tag }) {
     return (
         <span

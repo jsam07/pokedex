@@ -1,13 +1,11 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import Image from 'next/image';
 import { Fragment, useRef, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
 import { tags } from '@/content/pokemonTypes';
-import PokemonDetails from '../PokemonDetails';
 import { PokemonModalContext } from '@/context/PokemonModalContext';
+import PokemonDetails from '../PokemonDetails';
 
 function PokemonModal({ pokemon, show }) {
     const modalContext = useContext(PokemonModalContext);

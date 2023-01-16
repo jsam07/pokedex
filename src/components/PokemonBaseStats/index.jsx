@@ -1,6 +1,5 @@
 import Stat from '../Stat';
 
-/* eslint-disable react/jsx-no-useless-fragment */
 const sumStats = (stats) => {
     return stats.reduce((sum, stat) => sum + stat.score, 0);
 };

@@ -1,11 +1,8 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import Tag from '@/components/Tag';
-import { objectMap } from '@/util/common.util';
+import { objectMap } from '@/lib/common.lib';
 
-export const typeColors = {
+/* eslint-disable import/prefer-default-export */
+export const pokemonTypes = {
     normal: { bg: '#A8A77A', text: 'white', icon: '🔘' },
     fire: { bg: '#EE8130', text: 'white', icon: '🔥' },
     water: { bg: '#6390F0', text: 'white', icon: '💧' },
@@ -34,7 +31,7 @@ const generateTagComponent = (type, name) => {
     );
 };
 
-export const tags = objectMap(typeColors, (type, name) =>
+export const tags = objectMap(pokemonTypes, (type, name) =>
     generateTagComponent(type, name)
 );
 
@@ -44,5 +41,5 @@ export const geTypeColor = (pokemon) => {
     }
 
     const type = pokemon.types[0];
-    return typeColors[type].bg;
+    return pokemonTypes[type].bg;
 };

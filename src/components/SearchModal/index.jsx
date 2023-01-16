@@ -1,10 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable react/jsx-no-useless-fragment */
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-shadow */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useRef, useEffect } from 'react';
 
@@ -12,10 +5,10 @@ import SpeechRecognition, {
     useSpeechRecognition,
 } from 'react-speech-recognition';
 
+import { POKEMON_QUERY_LIMIT } from '@/constants';
+import { searchForPokemon } from '@/lib/search.lib';
 import SearchModalHeader from '../SearchModalHeader';
 import SearchModalItems from '../SearchModalContainer';
-import { searchForPokemon } from '@/util/pokemon.util';
-import { POKEMON_QUERY_LIMIT } from '@/constants';
 
 function SearchModal({ show, setState }) {
     const inputRef = useRef(null);

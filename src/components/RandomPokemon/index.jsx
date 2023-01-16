@@ -1,6 +1,6 @@
-/* eslint-disable import/no-unresolved */
 import { useEffect, useState } from 'react';
-import { fetchRandomPokemon } from '@/util/pokemon.util';
+
+import { fetchRandomPokemon } from '@/lib/pokemon.lib';
 import PokemonCard from '../PokemonCard';
 
 function RandomPokemon() {

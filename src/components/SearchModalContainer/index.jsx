@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-array-index-key */
-
 import Image from 'next/image';
 
 import SearchItem from '../SearchItem';
@@ -15,9 +12,9 @@ function SearchModalItems({ isSearchActive, results, handleCloseSearchModal }) {
                             No Results Found
                         </div>
                     ) : (
-                        results.map((item, idx) => (
+                        results.map((item) => (
                             <li
-                                key={`item.title ${idx}`}
+                                key={item.id}
                                 className="mx-2 my-1.5 rounded-md  snap-always snap-center transition duration-200 ease-in-out hover:cursor-pointer hover:bg-search-gray"
                             >
                                 <SearchItem

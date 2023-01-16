@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-
 const statsFormat = {
     hp: { display: 'HP', short: 'HP ' },
     attack: { display: 'Attack', short: 'ATK' },
