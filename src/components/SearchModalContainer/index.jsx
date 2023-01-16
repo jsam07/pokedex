@@ -7,7 +7,7 @@ import SearchItem from '../SearchItem';
 
 function SearchModalItems({ isSearchActive, results, handleCloseSearchModal }) {
     return (
-        <div className="search-container flex-grow overflow-auto py-2 min-h-[40px] max-h-[600px]">
+        <div className="search-container flex-grow overflow-auto py-2 max-h-[500px]">
             {isSearchActive ? (
                 <ul className="">
                     {results.length === 0 ? (

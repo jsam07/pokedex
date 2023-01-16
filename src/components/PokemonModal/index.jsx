@@ -33,7 +33,7 @@ function PokemonModal({ pokemon, show }) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className="fixed inset-0 transition-opacity bg-search-dark-blue bg-opacity-30" />
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-80 transition-opacity" />
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
@@ -88,7 +88,7 @@ function PokemonModal({ pokemon, show }) {
                                 />
                                 <div className="sm:flex sm:items-start">
                                     <div className="mt-3 text-center sm:mt-0 sm:text-left mx-auto">
-                                        <div className="flex flex-row">
+                                        <div className="flex flex-col">
                                             <Dialog.Title
                                                 as="h3"
                                                 className="text-2xl md:text-3xl font-bold leading-6 text-gray-900"
@@ -103,7 +103,7 @@ function PokemonModal({ pokemon, show }) {
                                                         : ''}
                                                 </span>
                                             </Dialog.Title>
-                                            <div className="ml-4 flex p-2">
+                                            <div className="flex my-2 space-x-2">
                                                 {pokemon &&
                                                     pokemon.types.map(
                                                         (type) => tags[type]
