@@ -63,6 +63,7 @@ function SearchModal({ show, setState }) {
         <Transition.Root show={show} as={Fragment}>
             <Dialog
                 as="div"
+                open={show}
                 auto-reopen="true"
                 initialFocus={inputRef}
                 className="fixed inset-0 z-50"

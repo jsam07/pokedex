@@ -54,25 +54,20 @@ export default function Home() {
                     setState={setPokemonModalState}
                 />
                 <main className={styles.main}>
-                    <div className={styles.description}>
-                        <div>
-                            <a
-                                href="https://www.pokemon.com/us"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Image
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
-                                    alt="Pokemon Logo"
-                                    className="mx-4 w-44 h-auto"
-                                    width={160}
-                                    height={160}
-                                    priority
-                                />
-                            </a>
-                        </div>
-                    </div>
-                    {/* <div className={styles.center}>a</div> */}
+                    <a
+                        href="https://www.pokemon.com/us"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="m-4 w-44 h-auto"
+                    >
+                        <Image
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                            alt="Pokemon Logo"
+                            width={160}
+                            height={160}
+                            priority
+                        />
+                    </a>
                     <SearchBar />
                     <div className={styles.grid}>
                         <RandomPokemon />
