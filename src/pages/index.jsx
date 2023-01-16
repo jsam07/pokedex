@@ -55,8 +55,6 @@ export default function Home() {
                 />
                 <main className={styles.main}>
                     <div className={styles.description}>
-                        {' '}
-                        <p>Get started by searching below</p>
                         <div>
                             <a
                                 href="https://www.pokemon.com/us"
@@ -74,11 +72,8 @@ export default function Home() {
                             </a>
                         </div>
                     </div>
-
-                    <div className={styles.center}>
-                        <SearchBar />
-                    </div>
-
+                    {/* <div className={styles.center}>a</div> */}
+                    <SearchBar />
                     <div className={styles.grid}>
                         <RandomPokemon />
                     </div>

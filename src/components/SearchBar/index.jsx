@@ -32,7 +32,7 @@ function SearchBar() {
             <div className="flex items-center justify-center flex-grow w-full">
                 <button
                     type="button"
-                    className="flex items-center w-screen h-12 max-w-5xl px-4 mx-8 space-x-3 text-left transition duration-100 ease-in-out bg-white border rounded-lg cursor-text border-search-dark-blue/20 hover:border-0 text-search-dark-blue/30 md:h-14 lg:h-16 hover:drop-shadow-lg"
+                    className="flex items-center w-[85vw] h-12 max-w-5xl px-4 mx-8 space-x-3 text-left transition duration-100 ease-in-out bg-white border rounded-lg cursor-text border-search-dark-blue/20 hover:border-0 text-search-dark-blue/30 md:h-14 lg:h-16 hover:drop-shadow-lg"
                     onClick={() => showSearchModal()}
                 >
                     <MagnifyingGlassIcon
