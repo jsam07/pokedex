@@ -6,6 +6,7 @@ module.exports = {
     },
     extends: [
         'airbnb',
+        'next/core-web-vitals',
         'plugin:react/recommended',
         'plugin:prettier/recommended',
     ],
