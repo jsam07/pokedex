@@ -42,6 +42,7 @@ function SearchModalHeader({
                     {inputRef.current && inputRef.current.value.trim() && (
                         <button
                             type="button"
+                            aria-label="clear"
                             className="flex items-center"
                             onClick={clearSearch}
                         >
@@ -63,6 +64,7 @@ function SearchModalHeader({
                         <span className="relative inline-flex">
                             <button
                                 type="button"
+                                aria-label="speechRecognition"
                                 className="flex items-center"
                                 onClick={SpeechRecognition.startListening}
                             >

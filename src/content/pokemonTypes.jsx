@@ -32,7 +32,7 @@ const generateTagComponent = (type, name) => {
 };
 
 export const tags = objectMap(pokemonTypes, (type, name) =>
-    generateTagComponent(type, name)
+    generateTagComponent(type, name),
 );
 
 export const geTypeColor = (pokemon) => {
