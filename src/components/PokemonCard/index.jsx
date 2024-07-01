@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useContext } from 'react';
-import { Inter } from '@next/font/google';
+import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
 
 import { tags } from '@/content/pokemonTypes';

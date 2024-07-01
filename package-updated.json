@@ -11,8 +11,9 @@
     "test:unit": "jest -i --colors --verbose --detectOpenHandles --passWithNoTests tests/spec/unit"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
+    "@headlessui/react": "^2.1.1",
     "@heroicons/react": "^2.1.4",
+    "@next/font": "14.2.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/line-clamp": "^0.4.4",

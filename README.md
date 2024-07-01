@@ -12,7 +12,7 @@
 ## Pokédex
 
 <p align="center">
-    <img alt="Search" src="./assets/images/pokedex_hero.png" width="100%"/>
+    <img alt="Search" src="https://github.com/jsam07/pokedex/assets/48119499/4be812d3-5660-4e34-b9f7-be6c05d66545" width="100%"/>
 </p>
 
 A Pokédex that allows users to search for their favorite Pokémon by name.
@@ -33,19 +33,19 @@ A Pokédex that allows users to search for their favorite Pokémon by name.
 Clone this repository:
 
 ```
-git clone git@github.com:jsam07/bcch-pokedex.git
+git clone git@github.com:jsam07/pokedex.git
 ```
 
 Install npm dependencies:
 
-```
-cd bcch-pokedex
+```bash
+cd pokedex
 npm install
 ```
 
 ### 2. Start Development Server
 
-```
+```bash
 npm run dev
 ```
 
@@ -58,7 +58,7 @@ The server is now running on http://localhost:3000.
 
 Run test suite:
 
-```
+```bash
 npm run test
 ```
 
@@ -66,7 +66,7 @@ npm run test
 
 Run linter:
 
-```
+```bash
 npm run lint
 ```
 
@@ -79,4 +79,3 @@ npm run lint
 ## Acknowledgments
 - [Heroicons](https://heroicons.com/)
 - [Headless UI](https://headlessui.dev/)
-
