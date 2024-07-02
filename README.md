@@ -12,7 +12,7 @@
 ## Pokédex
 
 <p align="center">
-    <img alt="Search" src="https://github.com/jsam07/pokedex/assets/48119499/4be812d3-5660-4e34-b9f7-be6c05d66545" width="100%"/>
+    <img alt="Search" src="https://github.com/jsam07/pokedex/assets/48119499/4d772c05-516d-44b4-9f02-a44fb8548dd3" width="100%"/>
 </p>
 
 A Pokédex that allows users to search for their favorite Pokémon by name.
