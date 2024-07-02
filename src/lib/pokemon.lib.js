@@ -140,7 +140,7 @@ const fetchAllPokemon = async () => {
                 } catch (error) {
                     return {};
                 }
-            })
+            }),
         );
     } catch (error) {
         return [];
@@ -160,7 +160,7 @@ export const fetchAllRandomPokemon = async (urls) => {
             } catch (error) {
                 return {};
             }
-        })
+        }),
     );
 };
 

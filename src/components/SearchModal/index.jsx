@@ -24,7 +24,7 @@ function SearchModal({ show, setState }) {
         if (searchQuery) {
             const queryResults = searchForPokemon(
                 searchQuery.toLowerCase(),
-                POKEMON_QUERY_LIMIT
+                POKEMON_QUERY_LIMIT,
             );
 
             setSearchResults(queryResults);

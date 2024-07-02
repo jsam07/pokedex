@@ -68,6 +68,7 @@ function PokemonModal({ pokemon, show }) {
                                 <button
                                     type="button"
                                     ref={cancelButtonRef}
+                                    aria-label="close"
                                     className="flex items-center focus:outline-none"
                                     onClick={handleClosePokemonModal}
                                 >
@@ -105,7 +106,7 @@ function PokemonModal({ pokemon, show }) {
                                             <div className="flex items-center justify-center md:justify-start my-2 space-x-2">
                                                 {pokemon &&
                                                     pokemon.types.map(
-                                                        (type) => tags[type]
+                                                        (type) => tags[type],
                                                     )}
                                             </div>
                                         </div>

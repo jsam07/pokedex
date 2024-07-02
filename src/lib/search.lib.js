@@ -2,7 +2,7 @@
 import { pokemonTrie } from '@/data/pokemon.trie';
 
 /**
- * Navigates the node that matches `searchText` if it exists.
+ * Navigates the node that matches `searchText`, if it exists.
  * @param {object} trie A k-ary search tree
  * @param {string} searchText The text to search for.
  * @returns Returns the node in the trie that corresponds to the `searchText`, null if it does not exist.
@@ -81,7 +81,7 @@ export const generateTrie = (pokemon) => {
 
 /**
  * Searches trie for all pokemon whose name start with `searchText`.
- * @param {string} searchText The text for query for pokemon.
+ * @param {string} searchText The text to query for pokemon.
  * @param {number} limit The maximum number of pokemon to search for.
  * @param {object} trie Custom search tree. Defaults to generated pokemon trie if not defined.
  * @returns An array of all pokemon found in the search tree.
